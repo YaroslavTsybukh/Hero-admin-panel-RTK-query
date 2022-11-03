@@ -1,0 +1,42 @@
+{
+  "heroes": [
+    {
+      "id": "c175fe40-f2b1-43f0-b9c3-bc0b542021e7",
+      "name": "Ярослав",
+      "description": "Я умею писать код",
+      "element": "wind"
+    }
+  ],
+  "filters": [
+    {
+      "id": 1,
+      "name": "all",
+      "label": "Все",
+      "className": "btn btn-outline-dark"
+    },
+    {
+      "id": 2,
+      "name": "fire",
+      "label": "Огонь",
+      "className": "btn btn-danger"
+    },
+    {
+      "id": 3,
+      "name": "water",
+      "label": "Вода",
+      "className": "btn btn-primary"
+    },
+    {
+      "id": 4,
+      "name": "wind",
+      "label": "ветер",
+      "className": "btn btn-success"
+    },
+    {
+      "id": 5,
+      "name": "earth",
+      "label": "Земля",
+      "className": "btn btn-secondary"
+    }
+  ]
+}
