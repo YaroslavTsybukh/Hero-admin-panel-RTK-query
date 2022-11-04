@@ -1,38 +1,31 @@
-import {useHttp} from '../../hooks/http.hook';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { heroDeleted , fetchHeroes , filteredHeroSelector } from './HeroSlice';
+import {useMemo} from 'react';
+import {useSelector} from 'react-redux';
+import {useGetHeroesQuery , useDeleteHeroMutation} from "../../api/api";
 import HeroesListItem from "../heroesListItem/HeroesListItem";
 import Spinner from '../spinner/Spinner';
 
-// Задача для этого компонента:
-// При клике на "крестик" идет удаление персонажа из общего состояния
-// Усложненная задача:
-// Удаление идет и с json файла при помощи метода DELETE
-
 const HeroesList = () => {
+    const filterActive = useSelector(state => state.filters.filterActive)
+    const {data: heroes = [] , isLoading , isError} = useGetHeroesQuery()
+    const [deleteChar] = useDeleteHeroMutation()
 
-    const filteredHero = useSelector(filteredHeroSelector)
+    const filteredHero = useMemo(() => {
+        const filteredHeroes = heroes.slice()
 
-    const heroesLoadingStatus = useSelector(state => state.heroes.heroesLoading);
-    const dispatch = useDispatch();
-    const {request} = useHttp();
-
-    useEffect(() => {
-        dispatch(fetchHeroes(request));
-        // eslint-disable-next-line
-    }, []);
+        if(filterActive === "all"){
+            return filteredHeroes
+        }else{
+            return filteredHeroes.filter(hero => hero.element === filterActive)
+        }
+    } , [heroes , filterActive])
 
     const onDeleteHero = (id) => {
-        request(`http://localhost:3001/heroes/${id}` , "DELETE")
-            .then(() => dispatch(heroDeleted(id)))
-            .catch(error => console.log(error))
+        deleteChar(id).unwrap().then(res => console.log("DELETED"))
     }
 
-    if (heroesLoadingStatus === "loading") {
+    if (isLoading) {
         return <Spinner/>;
-    } else if (heroesLoadingStatus === "error") {
+    } else if (isError) {
         return <h5 className="text-center mt-5">Ошибка загрузки</h5>
     }
 

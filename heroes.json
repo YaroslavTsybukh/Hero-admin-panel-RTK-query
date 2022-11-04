@@ -5,6 +5,18 @@
       "name": "Ярослав",
       "description": "Я умею писать код",
       "element": "wind"
+    },
+    {
+      "id": "4850b49c-a232-4de7-b202-ca9271f5d1d7",
+      "name": "Yaroslav Tsybukh",
+      "description": "jdlsfjliksdjf",
+      "element": "fire"
+    },
+    {
+      "id": "9120f4b5-de24-4f78-9bd8-8ca804ba8ba1",
+      "name": "Misha",
+      "description": "lskjgkl",
+      "element": "earth"
     }
   ],
   "filters": [
